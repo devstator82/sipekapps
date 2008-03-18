@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sipek2", "phone\Sipek2.csproj", "{D3EE2A06-D617-45F8-879E-8D0931BC8982}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sipek2", "SipekPhone\Sipek2.csproj", "{D3EE2A06-D617-45F8-879E-8D0931BC8982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
