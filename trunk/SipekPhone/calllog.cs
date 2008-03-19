@@ -21,8 +21,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Collections.ObjectModel;
-using CallControl;
-using Common;
+using Sipek.Common.CallControl;
+using Sipek.Common;
 
 namespace Sipek
 {

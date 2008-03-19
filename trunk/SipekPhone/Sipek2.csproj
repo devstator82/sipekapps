@@ -27,6 +27,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>Sipek.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,20 +54,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\pjsipDll.dll</HintPath>
     </Reference>
-    <Reference Include="pjsipWrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\pjsipWrapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telephony, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Telephony.dll</HintPath>
-    </Reference>
     <Reference Include="WaveLibMixer, Version=1.0.2927.30170, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\WaveLibMixer.dll</HintPath>
@@ -95,7 +88,14 @@
     <Compile Include="Common\CallControl\callManager.cs" />
     <Compile Include="Common\CallControl\callStateMachine.cs" />
     <Compile Include="Common\CallControl\callStates.cs" />
-    <Compile Include="Common\callInterface.cs" />
+    <Compile Include="Common\CallInterface.cs" />
+    <Compile Include="Common\CallLogInterface.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\MediaInterface.cs" />
+    <Compile Include="Common\TimerInterface.cs" />
+    <Compile Include="Common\AbstractWrapper.cs" />
+    <Compile Include="Common\AbstractFactory.cs" />
+    <Compile Include="Common\ConfiguratorInterface.cs" />
     <Compile Include="ErrorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,7 +121,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -233,6 +233,10 @@
     <Content Include="Resources\phone_redirect.png" />
     <Content Include="Resources\phone_reject.png" />
     <Content Include="Resources\phone_speaker.png" />
+    <Content Include="Sounds\congestion.wav" />
+    <Content Include="Sounds\dial.wav" />
+    <Content Include="Sounds\ring.wav" />
+    <Content Include="Sounds\ringback.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -242,4 +246,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>copy $(ProjectDir)\sounds  $(ProjectDir)\$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

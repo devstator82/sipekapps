@@ -26,11 +26,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
-using CallControl;
 using System.Windows.Forms.Design;
 using WaveLib.AudioMixer; // see http://www.codeproject.com/KB/graphics/AudioLib.aspx
-using Common;
-using PjsipWrapper; 
+using Sipek.Common;
+using Sipek.Common.CallControl;
+using Sipek.Sip.PjsipWrapper;
 
 
 namespace Sipek

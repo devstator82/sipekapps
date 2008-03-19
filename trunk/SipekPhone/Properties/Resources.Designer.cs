@@ -60,10 +60,22 @@ namespace Sipek.Properties {
             }
         }
         
+        internal static System.IO.UnmanagedMemoryStream congestion {
+            get {
+                return ResourceManager.GetStream("congestion", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap Dial {
             get {
                 object obj = ResourceManager.GetObject("Dial", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.IO.UnmanagedMemoryStream dial1 {
+            get {
+                return ResourceManager.GetStream("dial1", resourceCulture);
             }
         }
         
@@ -400,6 +412,18 @@ namespace Sipek.Properties {
             get {
                 object obj = ResourceManager.GetObject("phone_speaker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.IO.UnmanagedMemoryStream ring {
+            get {
+                return ResourceManager.GetStream("ring", resourceCulture);
+            }
+        }
+        
+        internal static System.IO.UnmanagedMemoryStream ringback {
+            get {
+                return ResourceManager.GetStream("ringback", resourceCulture);
             }
         }
     }
