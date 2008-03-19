@@ -25,13 +25,14 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Common;
+using Sipek.Common;
 
-namespace PjsipWrapper
+namespace Sipek.Sip.PjsipWrapper
 {
 
   /// <summary>
-  /// 
+  /// Implementation of call proxy. Each call (session) contains an instance of a call proxy. 
+  /// SipCallProxy passes requests further to pjsip stack 
   /// </summary>
   public class CSipCallProxy : ICallProxyInterface
   {
@@ -67,6 +68,13 @@ namespace PjsipWrapper
     {
       get { return _factory.getConfigurator(); }
     }
+
+    private int _sessionId;
+    public int SessionId
+    {
+      get { return _sessionId; }
+      set { _sessionId = value; }
+    }
     #endregion
 
     #region Constructor
@@ -78,7 +86,6 @@ namespace PjsipWrapper
 
     #endregion Constructor
 
-
     #region Methods
 
     /// <summary>
@@ -86,82 +93,139 @@ namespace PjsipWrapper
     /// </summary>
     /// <param name="dialedNo"></param>
     /// <param name="accountId"></param>
-    /// <returns>SessionId selected by sip stack</returns>
+    /// <returns>SessionId chosen by pjsip stack</returns>
     public int makeCall(string dialedNo, int accountId)
     {
       if (!_factory.getCommonProxy().IsInitialized) return -1;
 
       string uri = "sip:" + dialedNo + "@" + Config.getAccount(accountId).HostName;
-      int sessionId = dll_makeCall(accountId, uri);
-      return sessionId;
+      SessionId = dll_makeCall(accountId, uri);
+      return SessionId;
     }
 
-    public bool endCall(int sessionId)
+    /// <summary>
+    /// End call for a given session
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public bool endCall()
     {
-      dll_releaseCall(sessionId);
+      dll_releaseCall(SessionId);
       return true;
     }
 
-    public bool alerted(int sessionId)
+    /// <summary>
+    /// Signals sip stack that device is alerted (ringing)
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public bool alerted()
     {
-      dll_answerCall(sessionId, 180);
+      dll_answerCall(SessionId, 180);
       return true;
     }
 
-    public bool acceptCall(int sessionId)
+    /// <summary>
+    /// Signals that user accepts the call (asnwer)
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public bool acceptCall()
     {
-      dll_answerCall(sessionId, 200);
+      dll_answerCall(SessionId, 200);
       return true;
     }
     
-    public bool holdCall(int sessionId)
+    /// <summary>
+    /// Hold request for a given session
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public bool holdCall()
     {
-      dll_holdCall(sessionId);
+      dll_holdCall(SessionId);
       return true;
     }
     
-    public bool retrieveCall(int sessionId)
+    /// <summary>
+    /// Retrieve request for a given session
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public bool retrieveCall()
     {
-      dll_retrieveCall(sessionId);
+      dll_retrieveCall(SessionId);
       return true;
     }
           
-    public bool xferCall(int sessionId, string number)
+    /// <summary>
+    /// Trasfer call to number
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public bool xferCall(string number)
     {
       string uri = "sip:" + number + "@" + Config.getAccount().HostName;
-      dll_xferCall(sessionId, uri);
+      dll_xferCall(SessionId, uri);
       return true;
     }
     
-    public bool xferCallSession(int sessionId, int session)
+    /// <summary>
+    /// Transfer call to other session
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="session"></param>
+    /// <returns></returns>
+    public bool xferCallSession(int session)
     {
-      dll_xferCallWithReplaces(sessionId, session);
+      dll_xferCallWithReplaces(SessionId, session);
       return true;
     }
 
-    public bool threePtyCall(int sessionId, int session)
+    /// <summary>
+    /// Make conference with given session
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="session"></param>
+    /// <returns></returns>
+    public bool threePtyCall(int session)
     {
-      dll_serviceReq(sessionId, (int)EServiceCodes.SC_3PTY, "");
+      dll_serviceReq(SessionId, (int)EServiceCodes.SC_3PTY, "");
       return true;
     }
     
-    public bool serviceRequest(int sessionId, int code, string dest)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="code"></param>
+    /// <param name="dest"></param>
+    /// <returns></returns>
+    public bool serviceRequest(int code, string dest)
     {
       string destUri = "<sip:" + dest + "@" + Config.getAccount().HostName + ">";
-      dll_serviceReq(sessionId, (int)code, destUri);
+      dll_serviceReq(SessionId, (int)code, destUri);
       return true;
     }
 
-    public bool dialDtmf(int sessionId, string digits, int mode)
+    /// <summary>
+    /// Send dtmf digit
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="digits"></param>
+    /// <param name="mode"></param>
+    /// <returns></returns>
+    public bool dialDtmf(string digits, int mode)
     {
-      // todo:::check the dtmf mode
+      // TODO :::check the dtmf mode
       if (mode == 0)
       {
-        dll_dialDtmf(sessionId, digits, mode);
+        dll_dialDtmf(SessionId, digits, mode);
       }
       else
       {
-        dll_sendInfo(sessionId, digits);
+        dll_sendInfo(SessionId, digits);
       }
       return true;
     }
@@ -171,9 +235,11 @@ namespace PjsipWrapper
   }
 
   /// <summary>
-  /// 
+  /// Implementation of non-call oriented VoIP interface. 
+  /// This proxy is used for sip stack initialization and shut down, registration, and 
+  /// callback methods handling.
   /// </summary>
-  public class CSipCommonProxy : ICommonProxyInterface
+  public class CSipCommonProxy : IVoipProxy
   {
     #region Constructor
 
@@ -204,6 +270,13 @@ namespace PjsipWrapper
     private IConfiguratorInterface Config
     {
       get { return _factory.getConfigurator(); }
+    }
+
+    private bool _initialized = false;
+    public override bool IsInitialized
+    {
+      get { return _initialized; }
+      set { _initialized = value; }
     }
     #endregion
 
@@ -278,9 +351,31 @@ namespace PjsipWrapper
 
     #endregion Variables
 
-    #region Methods
+    #region Private Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private int start()
+    {
+      int status = -1;
 
+      int port = Config.SIPPort;
+      status = dll_init(port);
 
+      if (status != 0) return status;
+
+      status |= dll_main();
+      return status;
+    }
+    #endregion
+
+    #region Public Methods
+
+    /// <summary>
+    /// Initialize pjsip stack
+    /// </summary>
+    /// <returns></returns>
     public override int initialize()
     {
       // register callbacks (delegates)
@@ -317,43 +412,28 @@ namespace PjsipWrapper
       return status;
     }
 
-
-    private int start()
-    {
-      int status = -1;
-      
-      int port = Config.SIPPort;
-      status = dll_init(port);
-
-      if (status != 0) return status;
-
-      status |= dll_main();
-      return status;
-    }
-
+    /// <summary>
+    /// Shutdown pjsip stack
+    /// </summary>
+    /// <returns></returns>
     public override int shutdown()
     {
       return dll_shutdown();
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    // Call API
-    //
+    /// <summary>
+    /// Register all configured accounts 
+    /// </summary>
+    /// <returns></returns>
     public override int registerAccounts()
-    {
-      return registerAccounts(false);
-    }
-
-    public override int registerAccounts(bool renew)
     {
       if (!IsInitialized) return -1;
 
-      if (renew == true)
-      {
-        dll_removeAccounts();
-      } 
+      // 
+      dll_removeAccounts();
 
+      // 
       for (int i = 0; i < Config.NumOfAccounts; i++)
       {
         IAccount acc = Config.getAccount(i);
