@@ -48,15 +48,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using Common;
+using Sipek.Common;
 
-namespace CallControl
+namespace Sipek.Common.CallControl
 {
 
   //////////////////////////////////////////////////////////////////////////
   /// <summary>
   /// CCallManager
-  /// Main telephony class
+  /// Main telephony class. Manages call instances. Handles user events and dispatches to a proper 
+  /// call instance automaton. 
   /// </summary>
   public class CCallManager
   {
@@ -113,7 +114,6 @@ namespace CallControl
       }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
     private bool _initialized = false;
     public bool isInitialized
     {
@@ -121,7 +121,6 @@ namespace CallControl
     }
 
     #endregion Properties
-
 
     #region Constructor
 
@@ -213,7 +212,8 @@ namespace CallControl
 
     ///////////////////////////////////////////////////////////////////
     /// Common routines
-
+    
+    ////
     public int initialize()
     {
       int status = 0;
@@ -228,16 +228,14 @@ namespace CallControl
         // Initialize call table
         _calls = new Dictionary<int, CStateMachine>(); 
         
+        // initialize voip proxy
         status = Factory.getCommonProxy().initialize();
         if (status != 0) return status;
+      }
 
-        Factory.getCommonProxy().registerAccounts(false);
-      }
-      else
-      {       
-        // reregister 
-        Factory.getCommonProxy().registerAccounts(true); 
-      }
+      // (re)register 
+      Factory.getCommonProxy().registerAccounts(); 
+
       _initialized = true;
       return status;
     }
@@ -302,7 +300,7 @@ namespace CallControl
         // TODO pending action
         _pendingAction = new PendingAction(EPendingActions.ECreateSession, number, accountId);
         CStateMachine call = getCallInState(EStateId.ACTIVE); 
-        call.getState().holdCall(call.Session);
+        call.getState().holdCall();
       }
       return null;
     }
@@ -322,6 +320,7 @@ namespace CallControl
 
       // save session parameters
       call.Session = sessionId;
+      // add call to call table
       _calls.Add(sessionId, call);
       
       // notify GUI
@@ -395,7 +394,7 @@ namespace CallControl
     }
 
     /// <summary>
-    /// Collect statemachines being in a given state
+    /// Collect state machines in a given state
     /// </summary>
     /// <param name="stateId">state machine state</param>
     /// <returns>List of state machines</returns>
@@ -422,7 +421,7 @@ namespace CallControl
     /// <param name="session">session identification</param>
     public void onUserRelease(int session)
     {
-      this[session].getState().endCall(session);
+      this[session].getState().endCall();
     }
 
     /// <summary>
@@ -438,14 +437,14 @@ namespace CallControl
       {
         // put it on hold
         CStateMachine sm = list[0];
-        if (null != sm) sm.getState().holdCall(sm.Session);
+        if (null != sm) sm.getState().holdCall();
 
         // set ANSWER event pending for HoldConfirm
         // TODO
         _pendingAction = new PendingAction(EPendingActions.EUserAnswer, session);
         return;
       }
-      this[session].getState().acceptCall(session);
+      this[session].getState().acceptCall();
     }
 
     /// <summary>
@@ -458,7 +457,7 @@ namespace CallControl
       CAbstractState state = this[session].getState();
       if (state.StateId == EStateId.ACTIVE)
       {
-        this.getCall(session).getState().holdCall(session);
+        this.getCall(session).getState().holdCall();
       }
       else if (state.StateId == EStateId.HOLDING)
       {
@@ -468,14 +467,14 @@ namespace CallControl
         {
           // get 1st and put it on hold
           CStateMachine sm = ((List<CStateMachine>)enumCallsInState(EStateId.ACTIVE))[0];
-          if (null != sm) sm.getState().holdCall(sm.Session);
+          if (null != sm) sm.getState().holdCall();
 
           // set Retrieve event pending for HoldConfirm
           _pendingAction = new PendingAction(EPendingActions.EUserHold, session);
           return;
         }
 
-        this[session].getState().retrieveCall(session);
+        this[session].getState().retrieveCall();
       }
       else
       {
@@ -490,7 +489,7 @@ namespace CallControl
     /// <param name="number">number to transfer</param>
     public void onUserTransfer(int session, string number)
     {
-      this[session].getState().xferCall(session, number);
+      this[session].getState().xferCall(number);
     }
 
     /// <summary>
@@ -501,7 +500,7 @@ namespace CallControl
     /// <param name="mode"></param>
     public void onUserDialDigit(int session, string digits, int mode)
     {
-      this[session].getState().dialDtmf(session, digits, 0);
+      this[session].getState().dialDtmf(digits, 0);
     }
 
     /// <summary>
@@ -515,7 +514,7 @@ namespace CallControl
       if ((getNoCallsInState(EStateId.ACTIVE) == 1)&&(getNoCallsInState(EStateId.HOLDING) >= 1))
       {
         CStateMachine call = getCallInState(EStateId.HOLDING);
-        call.getState().retrieveCall(call.Session);
+        call.getState().retrieveCall();
         // set conference flag
         return;
       }

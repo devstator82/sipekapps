@@ -18,9 +18,9 @@
 
 using System.Timers;
 using System;
-using Common;
+using Sipek.Common;
 
-namespace CallControl
+namespace Sipek.Common.CallControl
 {
 
   public enum ETimerType
@@ -70,7 +70,12 @@ namespace CallControl
     public int Session
     {
       get { return _session; }
-      set { _session = value; }
+      set 
+      { 
+        _session = value;
+        // don't forget to set proxy sessionId in case of incoming call!
+        this.SigProxy.SessionId = value;
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////
