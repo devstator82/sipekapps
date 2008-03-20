@@ -47,6 +47,9 @@ namespace Sipek
       this.checkBoxDefault = new System.Windows.Forms.CheckBox();
       this.label6 = new System.Windows.Forms.Label();
       this.comboBoxAccounts = new System.Windows.Forms.ComboBox();
+      this.groupBox6 = new System.Windows.Forms.GroupBox();
+      this.label12 = new System.Windows.Forms.Label();
+      this.textBoxListenPort = new System.Windows.Forms.TextBox();
       this.tabPageSettingsServices = new System.Windows.Forms.TabPage();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -83,13 +86,12 @@ namespace Sipek
       this.buttonApply = new System.Windows.Forms.Button();
       this.buttonCancel = new System.Windows.Forms.Button();
       this.buttonOK = new System.Windows.Forms.Button();
-      this.groupBox6 = new System.Windows.Forms.GroupBox();
-      this.textBoxListenPort = new System.Windows.Forms.TextBox();
-      this.label12 = new System.Windows.Forms.Label();
+      this.checkBoxIMS = new System.Windows.Forms.CheckBox();
       this.tabControlSettings.SuspendLayout();
       this.tabPageSettingsSIP.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.groupBox3.SuspendLayout();
+      this.groupBox6.SuspendLayout();
       this.tabPageSettingsServices.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.groupBoxServices.SuspendLayout();
@@ -101,7 +103,6 @@ namespace Sipek
       ((System.ComponentModel.ISupportInitialize)(this.trackBarPlaybackVolume)).BeginInit();
       this.tabCodecsPage.SuspendLayout();
       this.panel2.SuspendLayout();
-      this.groupBox6.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControlSettings
@@ -234,6 +235,7 @@ namespace Sipek
       // 
       // groupBox3
       // 
+      this.groupBox3.Controls.Add(this.checkBoxIMS);
       this.groupBox3.Controls.Add(this.label7);
       this.groupBox3.Controls.Add(this.textBoxAccountName);
       this.groupBox3.Controls.Add(this.checkBoxDefault);
@@ -266,7 +268,7 @@ namespace Sipek
       // checkBoxDefault
       // 
       this.checkBoxDefault.AutoSize = true;
-      this.checkBoxDefault.Location = new System.Drawing.Point(90, 46);
+      this.checkBoxDefault.Location = new System.Drawing.Point(90, 47);
       this.checkBoxDefault.Name = "checkBoxDefault";
       this.checkBoxDefault.Size = new System.Drawing.Size(91, 17);
       this.checkBoxDefault.TabIndex = 2;
@@ -290,6 +292,35 @@ namespace Sipek
       this.comboBoxAccounts.Size = new System.Drawing.Size(155, 21);
       this.comboBoxAccounts.TabIndex = 0;
       this.comboBoxAccounts.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccounts_SelectedIndexChanged);
+      // 
+      // groupBox6
+      // 
+      this.groupBox6.Controls.Add(this.label12);
+      this.groupBox6.Controls.Add(this.textBoxListenPort);
+      this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.groupBox6.Location = new System.Drawing.Point(3, 268);
+      this.groupBox6.Name = "groupBox6";
+      this.groupBox6.Size = new System.Drawing.Size(291, 53);
+      this.groupBox6.TabIndex = 12;
+      this.groupBox6.TabStop = false;
+      this.groupBox6.Text = "Phone";
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Location = new System.Drawing.Point(5, 26);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(70, 13);
+      this.label12.TabIndex = 9;
+      this.label12.Text = "Listening port";
+      // 
+      // textBoxListenPort
+      // 
+      this.textBoxListenPort.Location = new System.Drawing.Point(90, 19);
+      this.textBoxListenPort.Name = "textBoxListenPort";
+      this.textBoxListenPort.Size = new System.Drawing.Size(56, 20);
+      this.textBoxListenPort.TabIndex = 8;
+      this.textBoxListenPort.Text = "5060";
       // 
       // tabPageSettingsServices
       // 
@@ -481,7 +512,7 @@ namespace Sipek
       this.trackBarRecordingVolume.Location = new System.Drawing.Point(6, 97);
       this.trackBarRecordingVolume.Maximum = 65535;
       this.trackBarRecordingVolume.Name = "trackBarRecordingVolume";
-      this.trackBarRecordingVolume.Size = new System.Drawing.Size(165, 45);
+      this.trackBarRecordingVolume.Size = new System.Drawing.Size(165, 42);
       this.trackBarRecordingVolume.SmallChange = 6553;
       this.trackBarRecordingVolume.TabIndex = 1;
       this.trackBarRecordingVolume.TickFrequency = 6553;
@@ -530,7 +561,7 @@ namespace Sipek
       this.trackBarPlaybackBalance.Minimum = -320;
       this.trackBarPlaybackBalance.Name = "trackBarPlaybackBalance";
       this.trackBarPlaybackBalance.Orientation = System.Windows.Forms.Orientation.Vertical;
-      this.trackBarPlaybackBalance.Size = new System.Drawing.Size(45, 65);
+      this.trackBarPlaybackBalance.Size = new System.Drawing.Size(42, 65);
       this.trackBarPlaybackBalance.SmallChange = 10;
       this.trackBarPlaybackBalance.TabIndex = 1;
       this.trackBarPlaybackBalance.TickFrequency = 320;
@@ -553,7 +584,7 @@ namespace Sipek
       this.trackBarPlaybackVolume.Location = new System.Drawing.Point(7, 92);
       this.trackBarPlaybackVolume.Maximum = 65535;
       this.trackBarPlaybackVolume.Name = "trackBarPlaybackVolume";
-      this.trackBarPlaybackVolume.Size = new System.Drawing.Size(167, 45);
+      this.trackBarPlaybackVolume.Size = new System.Drawing.Size(167, 42);
       this.trackBarPlaybackVolume.SmallChange = 6553;
       this.trackBarPlaybackVolume.TabIndex = 2;
       this.trackBarPlaybackVolume.TickFrequency = 6553;
@@ -683,34 +714,15 @@ namespace Sipek
       this.buttonOK.UseVisualStyleBackColor = true;
       this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
       // 
-      // groupBox6
+      // checkBoxIMS
       // 
-      this.groupBox6.Controls.Add(this.label12);
-      this.groupBox6.Controls.Add(this.textBoxListenPort);
-      this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.groupBox6.Location = new System.Drawing.Point(3, 268);
-      this.groupBox6.Name = "groupBox6";
-      this.groupBox6.Size = new System.Drawing.Size(291, 53);
-      this.groupBox6.TabIndex = 12;
-      this.groupBox6.TabStop = false;
-      this.groupBox6.Text = "Phone";
-      // 
-      // textBoxListenPort
-      // 
-      this.textBoxListenPort.Location = new System.Drawing.Point(90, 19);
-      this.textBoxListenPort.Name = "textBoxListenPort";
-      this.textBoxListenPort.Size = new System.Drawing.Size(56, 20);
-      this.textBoxListenPort.TabIndex = 8;
-      this.textBoxListenPort.Text = "5060";
-      // 
-      // label12
-      // 
-      this.label12.AutoSize = true;
-      this.label12.Location = new System.Drawing.Point(5, 26);
-      this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(70, 13);
-      this.label12.TabIndex = 9;
-      this.label12.Text = "Listening port";
+      this.checkBoxIMS.AutoSize = true;
+      this.checkBoxIMS.Location = new System.Drawing.Point(200, 47);
+      this.checkBoxIMS.Name = "checkBoxIMS";
+      this.checkBoxIMS.Size = new System.Drawing.Size(45, 17);
+      this.checkBoxIMS.TabIndex = 8;
+      this.checkBoxIMS.Text = "IMS";
+      this.checkBoxIMS.UseVisualStyleBackColor = true;
       // 
       // SettingsForm
       // 
@@ -729,6 +741,8 @@ namespace Sipek
       this.groupBox2.PerformLayout();
       this.groupBox3.ResumeLayout(false);
       this.groupBox3.PerformLayout();
+      this.groupBox6.ResumeLayout(false);
+      this.groupBox6.PerformLayout();
       this.tabPageSettingsServices.ResumeLayout(false);
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
@@ -745,8 +759,6 @@ namespace Sipek
       this.tabCodecsPage.ResumeLayout(false);
       this.tabCodecsPage.PerformLayout();
       this.panel2.ResumeLayout(false);
-      this.groupBox6.ResumeLayout(false);
-      this.groupBox6.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -811,5 +823,6 @@ namespace Sipek
     private System.Windows.Forms.GroupBox groupBox6;
     private System.Windows.Forms.Label label12;
     private System.Windows.Forms.TextBox textBoxListenPort;
+    private System.Windows.Forms.CheckBox checkBoxIMS;
   }
 }

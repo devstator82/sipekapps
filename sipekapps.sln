@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekPhoneDemo", "SipekDemo\SipekPhoneDemo.csproj", "{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekSdk", "SipekSdk\SipekSdk.csproj", "{2B1C372E-097F-4268-B1EA-2B918BEBD94B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekDemo", "SipekDemo\SipekDemo.csproj", "{D3EE2A06-D617-45F8-879E-8D0931BC8982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,16 +15,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{9C0A22EC-BB58-41E2-8AC1-5BFDEA85CF06}.Release|Win32.ActiveCfg = Release|Any CPU
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -35,6 +25,16 @@ Global
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2B1C372E-097F-4268-B1EA-2B918BEBD94B}.Release|Win32.ActiveCfg = Release|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D3EE2A06-D617-45F8-879E-8D0931BC8982}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
