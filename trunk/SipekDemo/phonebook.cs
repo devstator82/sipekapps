@@ -20,7 +20,7 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
-using Sipek.Sip.PjsipWrapper;
+using Sipek.Sip;
 
 namespace Sipek
 {

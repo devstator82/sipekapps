@@ -4,7 +4,7 @@ using System.Text;
 using System.Timers;
 using System.Runtime.InteropServices;
 using Sipek.Common.CallControl;
-using Sipek.Sip.PjsipWrapper;
+using Sipek.Sip;
 using Sipek.Common; 
 
 namespace Sipek

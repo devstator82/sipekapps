@@ -28,7 +28,7 @@ using System.Text;
 using System.Windows.Forms;
 using Sipek.Common.CallControl;
 using WaveLib.AudioMixer; // see http://www.codeproject.com/KB/graphics/AudioLib.aspx
-using Sipek.Sip.PjsipWrapper;
+using Sipek.Sip;
 using Sipek.Common; 
 
 namespace Sipek
