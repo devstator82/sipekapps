@@ -76,7 +76,7 @@
       <DependentUpon>KeyboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
-      <SubType>Component</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>

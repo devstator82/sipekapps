@@ -30,7 +30,7 @@ using System.Windows.Forms.Design;
 using WaveLib.AudioMixer; // see http://www.codeproject.com/KB/graphics/AudioLib.aspx
 using Sipek.Common;
 using Sipek.Common.CallControl;
-using Sipek.Sip.PjsipWrapper;
+using Sipek.Sip;
 
 
 namespace Sipek
