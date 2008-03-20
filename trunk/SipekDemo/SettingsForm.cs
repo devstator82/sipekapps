@@ -28,7 +28,6 @@ using System.Text;
 using System.Windows.Forms;
 using Sipek.Common.CallControl;
 using WaveLib.AudioMixer; // see http://www.codeproject.com/KB/graphics/AudioLib.aspx
-using Sipek.Sip;
 using Sipek.Common; 
 
 namespace Sipek
@@ -107,6 +106,7 @@ namespace Sipek
       textBoxPassword.Text = acc.Password;
       textBoxProxyAddress.Text = acc.HostName;
       textBoxDomain.Text = acc.DomainName;
+      checkBoxIMS.Checked = acc.ImsEnabled;
     }
 
     private IAccount getAccount(string accname)
@@ -151,7 +151,8 @@ namespace Sipek
         account.UserName = textBoxUsername.Text;
         account.Password = textBoxPassword.Text;
         account.DomainName = textBoxDomain.Text;
-
+        account.ImsEnabled = checkBoxIMS.Checked;
+        
         updateAccountList();
 
         if (checkBoxDefault.Checked) SipekConfigurator.DefaultAccountIndex = index;
