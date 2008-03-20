@@ -441,7 +441,6 @@ namespace Sipek.Sip.PjsipWrapper
         if (null == acc) return -1;
 
         // reset account state
-        //CallManager.setAccountState(i, 0);
         BaseAccountStateChanged(i, 0);
 
         if (acc.Id.Length > 0)
