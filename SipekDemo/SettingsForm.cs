@@ -85,7 +85,7 @@ namespace Sipek
     private void comboBoxAccounts_SelectedIndexChanged(object sender, EventArgs e)
     {
       string accname = comboBoxAccounts.Text;
-      if (SipekConfigurator.getAccount().AccountName == accname)
+      if (SipekConfigurator.getAccount(SipekConfigurator.DefaultAccountIndex).AccountName == accname)
         checkBoxDefault.Checked = true;
       else
         checkBoxDefault.Checked = false;

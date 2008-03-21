@@ -1093,7 +1093,7 @@ namespace Sipek
     }
     
     [DefaultValue(0)]
-    public object Tag
+    public new object Tag
     {
       get { return TrackBar.Tag; }
       set { TrackBar.Tag = value; }

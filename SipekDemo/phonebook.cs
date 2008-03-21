@@ -57,7 +57,7 @@ namespace Sipek
     private string _firstName;
     private string _lastName = "";
     private string _number;
-    private string _email;
+    //private string _email;
     private int _accountId;
     private string _uri;
     private bool _presenceEnabled;
