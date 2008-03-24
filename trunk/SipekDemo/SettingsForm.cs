@@ -192,7 +192,7 @@ namespace Sipek
       SipekConfigurator.Save();
 
       // reinitialize stack
-      CCallManager.getInstance().initialize();
+      CCallManager.getInstance().Initialize();
 
       // set codecs priority...
       List<string> codeclist = SipekConfigurator.CodecList;
