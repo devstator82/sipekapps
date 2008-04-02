@@ -26,7 +26,7 @@ namespace Example2_makeCall_abstractWrapper
     {
       // create call proxy ()
       CSipCallProxy call = new CSipCallProxy(new NullConfigurator());
-      int sessionId = call.makeCallByUri(textBox1.Text);
+      int sessionId = call.makeCall(textBox1.Text, 1);
 
       label2.Text = (sessionId >= 0 ? "Success" : "Failed") + " (" + sessionId + ")";
     }
