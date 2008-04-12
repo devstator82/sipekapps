@@ -33,7 +33,7 @@ namespace Example3_makeCall_CallControl
     private void button1_Click(object sender, EventArgs e)
     {
       // create call
-      CStateMachine call = _manager.createOutboundCall(textBox1.Text);
+      IStateMachine call = _manager.createOutboundCall(textBox1.Text);
       // show the result
       int sessionId = (call == null ? -1 : call.Session); 
       label2.Text = (sessionId >= 0 ? "Success" : "Failed") + " (" + sessionId + ")";
