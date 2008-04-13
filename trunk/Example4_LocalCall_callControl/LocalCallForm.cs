@@ -22,10 +22,6 @@ namespace Example4_LocalCall_callControl
     public LocalCallForm()
     {
       InitializeComponent();
-    }
-
-    private void LocalCallForm_Load(object sender, EventArgs e)
-    {
       // initialize Call Control
       _manager = CCallManager.getInstance();
 
@@ -35,7 +31,6 @@ namespace Example4_LocalCall_callControl
       _manager.Initialize();
       // subscribe to CallStateChanged event
       _manager.CallStateRefresh += new CCallManager.DCallStateRefresh(_manager_CallStateRefresh);
-
     }
     
     void _manager_CallStateRefresh(int sessionId)
