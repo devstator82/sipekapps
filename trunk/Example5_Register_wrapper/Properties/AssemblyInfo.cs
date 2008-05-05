@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Example4_LocalCall_callControl")]
+[assembly: AssemblyTitle("Example5_Register_wrapper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("sasacoh")]
-[assembly: AssemblyProduct("Example4_LocalCall_callControl")]
+[assembly: AssemblyProduct("Example5_Register_wrapper")]
 [assembly: AssemblyCopyright("Copyright © sasacoh 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b5938e9a-1ca6-4c1d-932e-06017c471c58")]
+[assembly: Guid("549c2b67-cb02-4916-bb21-ef440d5397a8")]
 
 // Version information for an assembly consists of the following four values:
 //

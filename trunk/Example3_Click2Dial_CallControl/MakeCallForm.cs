@@ -15,19 +15,14 @@ namespace Example3_makeCall_CallControl
   public partial class MakeCallForm : Form
   {
     // create factory
-    CCallManager _manager;
+    CCallManager _manager = CCallManager.Instance;
 
     public MakeCallForm()
     {
       InitializeComponent();
 
-      // initialize Call Control
-      _manager = CCallManager.getInstance();
-      
-      // Assign pjsipWrapper instance as abstractProxy 
-      _manager.Factory.CommonProxy = CSipCommonProxy.GetInstance(); ;
-      // initialize Call Control
-      _manager.Initialize();
+      // initialize Call Control and assign pjsip wrapper instance
+      _manager.Initialize(pjsipStackProxy.Instance);
     }
 
     private void button1_Click(object sender, EventArgs e)
