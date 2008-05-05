@@ -13,6 +13,161 @@ namespace Example5_Register_wrapper
   public partial class RegisterForm : Form
   {
     #region Inner class (Account data holder)
+
+    class MyConfig : IConfiguratorInterface
+    {
+      #region IConfiguratorInterface Members
+
+      public bool AAFlag
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public List<IAccount> Accounts
+      {
+        get { throw new Exception("The method or operation is not implemented."); }
+      }
+
+      public bool CFBFlag
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public string CFBNumber
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public bool CFNRFlag
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public string CFNRNumber
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public bool CFUFlag
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public string CFUNumber
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public List<string> CodecList
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public bool DNDFlag
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public int DefaultAccountIndex
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public bool IsNull
+      {
+        get { throw new Exception("The method or operation is not implemented."); }
+      }
+
+      public int SIPPort
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
+
+      public void Save()
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+
+      #endregion
+    }
+
     class MyAccount : IAccount
     {
       RegisterForm _form;
