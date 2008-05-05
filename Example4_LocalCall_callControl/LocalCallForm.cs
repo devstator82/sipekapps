@@ -14,25 +14,43 @@ namespace Example4_LocalCall_callControl
 {
   public partial class LocalCallForm : Form
   {
-    delegate void DCallStateRefresh(int sessionId);
 
-    // create factory
-    CCallManager _manager;
+    // assign manager instance
+    CCallManager _manager = CCallManager.Instance;
+
+    // instance of ouotgoing call
+    IStateMachine outcall = null;
+    // instance of incoming call
+    IStateMachine incall = null;
 
     public LocalCallForm()
     {
       InitializeComponent();
-      // initialize Call Control
-      _manager = CCallManager.getInstance();
 
-      // Assign pjsipWrapper instance as abstractProxy 
-      _manager.Factory.CommonProxy = CSipCommonProxy.GetInstance();
-      // initialize Call Control
-      _manager.Initialize();
-      // subscribe to CallStateChanged event
-      _manager.CallStateRefresh += new CCallManager.DCallStateRefresh(_manager_CallStateRefresh);
+      // initialize Call Control and assign pjsipWrapper instance 
+      _manager.Initialize(pjsipStackProxy.Instance);
+
+      // subscribe to CallStateChanged and CallIncoming events
+      _manager.CallStateRefresh += new DCallStateRefresh(_manager_CallStateRefresh);
+      _manager.IncomingCallNotification += new DIncomingCallNotification(_manager_IncomingCallNotification);
+    }
+
+    /// <summary>
+    /// Incoming call callback. Just assign incall.
+    /// </summary>
+    /// <param name="sessionId"></param>
+    /// <param name="number"></param>
+    /// <param name="info"></param>
+    void _manager_IncomingCallNotification(int sessionId, string number, string info)
+    {
+      // assign incoming call instance to member variable
+      incall = _manager.getCall(sessionId);
     }
     
+    /// <summary>
+    /// Call state changed
+    /// </summary>
+    /// <param name="sessionId"></param>
     void _manager_CallStateRefresh(int sessionId)
     {
         if (this.InvokeRequired)
@@ -46,49 +64,45 @@ namespace Example4_LocalCall_callControl
         }
     }
 
+    /// <summary>
+    /// Update windows controls
+    /// </summary>
+    /// <param name="sessionId"></param>
     void CallStateRefreshed(int sessionId)
     {
-        // get call instance
-        IStateMachine call = _manager.getCall(sessionId);
+      // sessionId belongs to an outgoing call leg
+      if (outcall != null) textBoxOutCallState.Text = outcall.StateId.ToString();
 
-        // sessionId belongs to an outgoing call leg
-        if (sessionId == 0)
-        {
-          textBoxOutCallState.Text = call.State.ToString();
-          textBoxOutCallState.Tag = sessionId;
-        }
-        else
-          if (sessionId == 1) // incoming call leg
-          {
-            textBoxIncCallState.Text = call.State.ToString();
-            textBoxIncCallState.Tag = sessionId;
-          }
-      }
+      if (incall != null) textBoxIncCallState.Text = incall.StateId.ToString();
+    }
 
+    /// <summary>
+    /// Make call click handler
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonOutCall_Click(object sender, EventArgs e)
     {
-        // check if number of calls (allow only 1)
-        if (_manager.Count > 0) return;
+      // check number of calls (allow only 1)
+      if (_manager.Count > 0) return;
 
-        // create call
-        IStateMachine call = _manager.createOutboundCall("sip:127.0.0.1");
-        // show the result
-        int sessionId = (call == null ? -1 : call.Session);
+      // create call (local loop)
+      outcall = _manager.createOutboundCall("sip:127.0.0.1");
     }
 
     private void buttonIncRelease_Click(object sender, EventArgs e)
     {
-        _manager.onUserRelease((int)textBoxIncCallState.Tag);
+      if (incall != null) _manager.onUserRelease(incall.Session);
     }
 
     private void buttonIncAnswer_Click(object sender, EventArgs e)
     {
-      _manager.onUserAnswer((int)textBoxIncCallState.Tag);
+      if (incall != null) _manager.onUserAnswer(incall.Session);
     }
 
     private void buttonOutRelease_Click(object sender, EventArgs e)
     {
-      _manager.onUserRelease((int)textBoxOutCallState.Tag);
+      if (outcall != null) _manager.onUserRelease(outcall.Session);
     }
 
 

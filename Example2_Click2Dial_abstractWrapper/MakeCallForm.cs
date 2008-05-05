@@ -12,20 +12,19 @@ namespace Example2_makeCall_abstractWrapper
 {
   public partial class MakeCallForm : Form
   {
-    CSipCommonProxy proxy;
+    pjsipStackProxy pjsipProxy = pjsipStackProxy.Instance;
 
     public MakeCallForm()
     {
       InitializeComponent();
       // PjsipWrapper initialization
-      proxy = CSipCommonProxy.GetInstance();
-      proxy.initialize();
+      pjsipProxy.initialize();
     }
 
     private void button1_Click(object sender, EventArgs e)
     {
       // create call proxy ()
-      CSipCallProxy call = new CSipCallProxy(new NullConfigurator());
+      ICallProxyInterface call = pjsipProxy.createCallProxy();
       int sessionId = call.makeCall(textBox1.Text, 1);
 
       label2.Text = (sessionId >= 0 ? "Success" : "Failed") + " (" + sessionId + ")";
