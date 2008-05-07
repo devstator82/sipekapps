@@ -12,7 +12,7 @@ namespace Example1_makeCall
   public partial class MakeCallForm : Form
   {
     [DllImport("pjsipDll.dll")]
-    private static extern int dll_init(int listenPort);
+    private static extern int dll_init();
     [DllImport("pjsipDll.dll")]
     private static extern int dll_main();
     [DllImport("pjsipDll.dll")]
@@ -23,7 +23,7 @@ namespace Example1_makeCall
       InitializeComponent();
       
       // initialize psjip
-      int status = dll_init(5060);
+      int status = dll_init();
       status |= dll_main();
     }
 

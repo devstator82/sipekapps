@@ -292,7 +292,9 @@ namespace Example5_Register_wrapper
 
       // add account data holder to proxy!
       registrar.Config.Accounts.Add(acc);
-      
+
+      this.textBoxStatus.Text = "Waiting status...";
+      this.Refresh();
       // send register request
       registrar.registerAccounts();
     }
