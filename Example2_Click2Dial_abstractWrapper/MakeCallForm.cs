@@ -25,7 +25,7 @@ namespace Example2_makeCall_abstractWrapper
     {
       // create call proxy ()
       ICallProxyInterface call = pjsipProxy.createCallProxy();
-      int sessionId = call.makeCall(textBox1.Text, 1);
+      int sessionId = call.makeCall(textBox1.Text, 0);
 
       label2.Text = (sessionId >= 0 ? "Success" : "Failed") + " (" + sessionId + ")";
     }
