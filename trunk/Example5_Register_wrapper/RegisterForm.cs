@@ -165,7 +165,19 @@ namespace Example5_Register_wrapper
         throw new Exception("The method or operation is not implemented.");
       }
 
+      public bool PublishEnabled
+      {
+        get
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+        set
+        {
+          throw new Exception("The method or operation is not implemented.");
+        }
+      }
       #endregion
+
     }
 
     class MyAccount : IAccount
@@ -232,9 +244,33 @@ namespace Example5_Register_wrapper
         get { return _form.textBoxUsername.Text; }
         set { }
       }
+      public int Index
+      {
+        get
+        {
+          return 0;
+        }
+        set
+        {
+          ;
+        }
+      }
+
+      public ETransportMode TransportMode
+      {
+        get
+        {
+          return ETransportMode.TM_UDP;
+        }
+        set
+        {
+          ;
+        }
+      }
 
       #endregion
     }
+
     #endregion
 
     // store registrar proxy instance

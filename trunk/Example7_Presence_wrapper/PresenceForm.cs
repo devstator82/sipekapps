@@ -10,6 +10,269 @@ using Sipek.Common;
 
 namespace Example7_Presence_wrapper
 {
+
+  #region Inner class (Account data holder)
+
+  class MyConfig : IConfiguratorInterface
+  {
+    #region IConfiguratorInterface Members
+
+    public bool AAFlag
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public List<IAccount> Accounts
+    {
+      get { 
+        List<IAccount> accounts = new List<IAccount>();
+        accounts.Add(new MyAccount());
+        return accounts;
+      }
+    }
+
+    public bool CFBFlag
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public string CFBNumber
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public bool CFNRFlag
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public string CFNRNumber
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public bool CFUFlag
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public string CFUNumber
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public List<string> CodecList
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public bool DNDFlag
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public int DefaultAccountIndex
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public bool IsNull
+    {
+      get { throw new Exception("The method or operation is not implemented."); }
+    }
+
+    public int SIPPort
+    {
+      get
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+
+    public void Save()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
+
+    public bool PublishEnabled
+    {
+      get
+      {
+        return true;
+      }
+      set
+      {
+        throw new Exception("The method or operation is not implemented.");
+      }
+    }
+    #endregion
+
+  }
+
+  class MyAccount : IAccount
+  {
+
+    #region IAccount Members
+    public MyAccount()
+    { }
+
+    public string AccountName
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string DisplayName
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string DomainName
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string HostName
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string Id
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string Password
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public string ProxyAddress
+    {
+      get { return ""; }
+      set { }
+    }
+
+    public int RegState
+    {
+      get { return 200; }
+      set { }
+    }
+
+    public string UserName
+    {
+      get { return ""; }
+      set { }
+    }
+    public int Index
+    {
+      get
+      {
+        return 0;
+      }
+      set
+      {
+        ;
+      }
+    }
+
+    public ETransportMode TransportMode
+    {
+      get
+      {
+        return ETransportMode.TM_UDP;
+      }
+      set
+      {
+        ;
+      }
+    }
+
+    #endregion
+  }
+
+  #endregion
+
+
   public partial class PresenceForm : Form
   {
     // store presence instance
@@ -30,7 +293,10 @@ namespace Example7_Presence_wrapper
           EUserStatus.OFFLINE });
 
       // Initialize pjsip stack
+      SipConfigStruct.Instance.publishEnabled = true;
       pjsipStackProxy.Instance.initialize();
+      messenger.Config = new MyConfig();
+
       // add test buddy
       messenger.addBuddy("sip:buddy1@127.0.0.1", true, 0);
 
@@ -64,7 +330,7 @@ namespace Example7_Presence_wrapper
     {
       //comboBoxPresence.SelectedIndex
       if (comboBoxPresence.SelectedIndex > -1)
-      messenger.setStatus(1, (EUserStatus)comboBoxPresence.SelectedIndex );
+        messenger.setStatus(0, (EUserStatus)comboBoxPresence.SelectedIndex );
     }
 
 
