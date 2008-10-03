@@ -1,5 +1,27 @@
-﻿using System;
-//using System.Linq;
+﻿/* 
+ * Copyright (C) 2008 Sasa Coh <sasacoh@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ * 
+ * 
+ * @see http://sipekphone.googlepages.com/pjsipwrapper
+ * @see http://voipengine.googlepages.com/
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,151 +32,75 @@ using Sipek.Common;
 using Sipek.Sip;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using Sipek.Common.CallControl;
 //using System.Media;
 
-namespace vmhtStackProject
+namespace SipekMobile
 {
-    public partial class CallForm : Form
+    public partial class PhoneForm : Form
     {
-        ICallProxyInterface call;
-        //SoundPlayer player = new SoundPlayer("\\Program Files\\vmhtStackProject\\Alarm5.wav");
-        //SoundPlayer playerTone = new SoundPlayer("\\Program Files\\vmhtStackProject\\ringout.wav");
-        bool incomingEnable = false;
-        bool confirmedEnable = false;
-        int numberCallLost = 0;
-              
-        //call back state changed
-        void proxy_stateChanged(int callId, ESessionState callState, string info)
-        {
-            if (this.InvokeRequired)
-            {
-                Invoke(new DCallStateChanged(proxy_stateChanged), new object[] { callId, callState, info });
-            }
-            else
-            {
-                sync_StateChanged(callId, callState, info);
-            }
-        }
-         
-        private void sync_StateChanged(int callId, ESessionState callState, string info)
-        {
-            textBoxCallState.Text = callState.ToString();
+      //SoundPlayer player = new SoundPlayer("\\Program Files\\vmhtStackProject\\Alarm5.wav");
+      //SoundPlayer playerTone = new SoundPlayer("\\Program Files\\vmhtStackProject\\ringout.wav");
+      IStateMachine _currentCall;
 
-            if (callState == ESessionState.SESSION_STATE_DISCONNECTED && confirmedEnable == true)
-            {
-                Process.GetCurrentProcess().Close();
-                MessageBox.Show("Call Closed!!");
-                Process.GetCurrentProcess().Kill();
-                
-            }else if (callState == ESessionState.SESSION_STATE_DISCONNECTED && incomingEnable == true)
-            {
-                callState= ESessionState.SESSION_STATE_NULL;
-                incomingEnable = false;
-                callButton.Visible = true;
-                textBoxExtension.Visible = true;
-                label1.Visible = true;
-                textBoxCallState.Text = "";
-                //player.Stop();
-                numberCallLost += 1;
-                textBoxNumberCallLost.Text = numberCallLost.ToString();
-
-            }if (callState == ESessionState.SESSION_STATE_DISCONNECTED && incomingEnable == false && confirmedEnable == false)
-            {
-                Process.GetCurrentProcess().Close();
-                MessageBox.Show("Service or Option unavailable!!");
-                Process.GetCurrentProcess().Kill();
-            }
-
-            if(callState == ESessionState.SESSION_STATE_INCOMING)
-            {
-                answerButton.Visible = true;
-                incomingEnable = true;
-                //player.PlayLooping();
-                callButton.Visible = false;
-                textBoxExtension.Visible = false;
-                label1.Visible = false;
-                textBoxCallState.Text = "Incoming Call!!!";
-            }
-
-            if (callState == ESessionState.SESSION_STATE_CALLING)
-            {
-                //playerTone.PlayLooping();
-
-            }
-
-
-            if (callState == ESessionState.SESSION_STATE_CONFIRMED)
-            {
-                //playerTone.Stop();
-                confirmedEnable = true;
-                incomingEnable = false;
-                textBoxCallState.Text = callState.ToString(); 
-                this.exitButton.Visible = false;
-                this.releaseButton.Visible = true;
-            }
-        }
-       
-
-        int indexparameter;
-        String host;
-        int sessionId;
-
-        public CallForm(int indexparameter, String host)
-        {
-            InitializeComponent();
-            this.indexparameter = indexparameter;
-            this.host = host;
-          
-            ICallProxyInterface.CallStateChanged += new DCallStateChanged(proxy_stateChanged);
-            call = pjsipStackProxy.Instance.createCallProxy();
-            
-    
+      CCallManager CallManager
+      {
+        get { return CCallManager.Instance; }
       }
 
-        private void callButton_Click(object sender, EventArgs e)
-        {
-            String userCall = textBoxExtension.Text; //"150";
-            String dialed = "sip:" + userCall + "@" + host;
-            sessionId = call.makeCall(dialed, indexparameter);
+      //call back state changed
+      void proxy_stateChanged(int callId, ESessionState callState, string info)
+      {
+          if (this.InvokeRequired)
+          {
+              Invoke(new DCallStateChanged(proxy_stateChanged), new object[] { callId, callState, info });
+          }
+          else
+          {
+              sync_StateChanged(callId, callState, info);
+          }
+      }
+         
+      private void sync_StateChanged(int callId, ESessionState callState, string info)
+      {
+        statusBar1.Text = callState.ToString();
+      }
+     
+      public PhoneForm(int indexparameter, String host)
+      {
+        InitializeComponent();
+          
+        // register callback
+        ICallProxyInterface.CallStateChanged += new DCallStateChanged(proxy_stateChanged);
+      }
 
-            if (sessionId >= 0)
-            {
-               answerButton.Visible = false;
-            }
-        }
+      private void callButton_Click(object sender, EventArgs e)
+      {
+          _currentCall = CallManager.createOutboundCall(textBoxNumber.Text);
+      }
 
-        private void answerButton_Click(object sender, EventArgs e)
-        {
-            //player.Stop();
-            call.acceptCall();
-        }
 
-        private void releaseButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                call.endCall();
+      private void releaseButton_Click(object sender, EventArgs e)
+      {
+          try
+          {
+            CallManager.onUserRelease(_currentCall.Session);
 
-            }
-            catch (Exception o)
-            { }
+          }
+          catch (Exception o)
+          { }
 
-        }
+      }
 
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Process.GetCurrentProcess().Kill();
-            }
-            catch (Exception o)
-            { }
-        }
+      private void exitButton_Click(object sender, EventArgs e)
+      {
+          try
+          {
+              Process.GetCurrentProcess().Kill();
+          }
+          catch (Exception o)
+          { }
+      }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            call.dialDtmf(textBox1.Text, EDtmfMode.DM_Inband);
-            textBox1.Text = "";
-        }
     }
 }
