@@ -1,9 +1,8 @@
 ﻿using System;
-//using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace vmhtStackProject
+namespace SipekMobile
 {
     static class Program
     {
@@ -13,7 +12,7 @@ namespace vmhtStackProject
         [MTAThread]
         static void Main()
         {
-            Application.Run(new RegisterForm());
+            Application.Run(new SettingsForm());
         }
     }
 }
