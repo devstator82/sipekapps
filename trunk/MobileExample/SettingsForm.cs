@@ -328,11 +328,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return 0; //throw new Exception("The method or operation is not implemented.");
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            //throw new Exception("The method or operation is not implemented.");
           }
         }
 
@@ -377,11 +377,12 @@ namespace SipekMobile
           pjsipStackProxy.Instance.Config = Config;
           pjsipRegistrar.Instance.Config = Config;
 
+        //  register event for registration status change
+          pjsipRegistrar.Instance.AccountStateChanged += new DAccountStateChanged(proxy_AccountStateChanged);
+
           pjsipStackProxy.Instance.initialize();
           CallManager.Initialize();
 
-          //  register event for registration status change
-          pjsipRegistrar.Instance.AccountStateChanged += new DAccountStateChanged(proxy_AccountStateChanged);
       }
 
 
