@@ -367,24 +367,23 @@ namespace SipekMobile
 
       public SettingsForm()
       {
-          InitializeComponent();
+        InitializeComponent();
 
-          _config = new PhoneConfig(this);
+        _config = new PhoneConfig(this);
 
-          CallManager.StackProxy = pjsipStackProxy.Instance;
+        CallManager.StackProxy = pjsipStackProxy.Instance;
 
-          CallManager.Config = Config;
-          pjsipStackProxy.Instance.Config = Config;
-          pjsipRegistrar.Instance.Config = Config;
+        CallManager.Config = Config;
+        pjsipStackProxy.Instance.Config = Config;
+        pjsipRegistrar.Instance.Config = Config;
 
         //  register event for registration status change
-          pjsipRegistrar.Instance.AccountStateChanged += new DAccountStateChanged(proxy_AccountStateChanged);
+        pjsipRegistrar.Instance.AccountStateChanged += new DAccountStateChanged(proxy_AccountStateChanged);
 
-          pjsipStackProxy.Instance.initialize();
-          CallManager.Initialize();
+        pjsipStackProxy.Instance.initialize();
+        CallManager.Initialize();
 
       }
-
 
       /// <summary>
       /// Invoke status refresh. First check for cross threading!!!
@@ -410,26 +409,26 @@ namespace SipekMobile
       /// <param name="accState"></param>
       private void sync_AccountStateChanged(int accId, int accState)
       {
-          if (accState != 0)
-          {
-              this.statusBar1.Text = accState.ToString();
+        if (accState != 0)
+        {
+            this.statusBar1.Text = accState.ToString();
 
-              if (accState == 200)
-              {
-                  int index = Config.Accounts[Config.DefaultAccountIndex].Index;
+            if (accState == 200)
+            {
+                int index = Config.Accounts[Config.DefaultAccountIndex].Index;
 
-                  (new PhoneForm(index, Config.Accounts[index].HostName)).Show();
-              }
-              else if (accState == 408)
-              {
-                  MessageBox.Show("Request Timeout");
-              }
-              else
-              {
-                  MessageBox.Show("Registration failed");
-              }
+                (new PhoneForm(index, Config.Accounts[index].HostName)).Show();
+            }
+            else if (accState == 408)
+            {
+                MessageBox.Show("Request Timeout");
+            }
+            else
+            {
+                MessageBox.Show("Registration failed");
+            }
 
-          }
+        }
       }
 
       private void registerButton_Click(object sender, EventArgs e)

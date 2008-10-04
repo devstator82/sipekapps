@@ -76,20 +76,13 @@ namespace SipekMobile
 
       private void callButton_Click(object sender, EventArgs e)
       {
-          _currentCall = CallManager.createOutboundCall(textBoxNumber.Text);
+        _currentCall = CallManager.createOutboundCall(textBoxNumber.Text);
       }
 
 
       private void releaseButton_Click(object sender, EventArgs e)
       {
-          try
-          {
-            CallManager.onUserRelease(_currentCall.Session);
-
-          }
-          catch (Exception o)
-          { }
-
+        CallManager.onUserRelease(_currentCall.Session);
       }
 
       private void exitButton_Click(object sender, EventArgs e)
