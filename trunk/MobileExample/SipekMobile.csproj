@@ -86,7 +86,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\sipeksdk\SipekSdk\SipekSdk_mobile.csproj">
+    <ProjectReference Include="sipeksdk\SipekSdk_mobile.csproj">
       <Project>{8202E1E6-3828-4E2C-9B3A-9F18CAE32CA2}</Project>
       <Name>SipekSdk_mobile</Name>
     </ProjectReference>

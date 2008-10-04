@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekMobile", "SipekMobile.csproj", "{11BB7350-931F-4234-AF97-766CBA5ACB4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekSdk_mobile", "..\..\sipeksdk\SipekSdk\SipekSdk_mobile.csproj", "{8202E1E6-3828-4E2C-9B3A-9F18CAE32CA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SipekSdk_mobile", "sipeksdk\SipekSdk_mobile.csproj", "{8202E1E6-3828-4E2C-9B3A-9F18CAE32CA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
