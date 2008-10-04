@@ -48,22 +48,10 @@ namespace SipekMobile
         get { return CCallManager.Instance; }
       }
 
-      //call back state changed
-      void proxy_stateChanged(int callId, ESessionState callState, string info)
+        
+      private void sync_StateChanged(int sessionId)
       {
-          if (this.InvokeRequired)
-          {
-              Invoke(new DCallStateChanged(proxy_stateChanged), new object[] { callId, callState, info });
-          }
-          else
-          {
-              sync_StateChanged(callId, callState, info);
-          }
-      }
-         
-      private void sync_StateChanged(int callId, ESessionState callState, string info)
-      {
-        statusBar1.Text = callState.ToString();
+        statusBar1.Text = CallManager.getCall(sessionId).StateId.ToString();
       }
      
       public PhoneForm(int indexparameter, String host)
@@ -71,7 +59,19 @@ namespace SipekMobile
         InitializeComponent();
           
         // register callback
-        ICallProxyInterface.CallStateChanged += new DCallStateChanged(proxy_stateChanged);
+        CallManager.CallStateRefresh += new DCallStateRefresh(CallManager_CallStateRefresh);
+      }
+
+      void CallManager_CallStateRefresh(int sessionId)
+      {
+        if (this.InvokeRequired)
+        {
+          Invoke(new DCallStateRefresh(sync_StateChanged), new object[] { sessionId });
+        }
+        else
+        {
+          sync_StateChanged(sessionId);
+        }
       }
 
       private void callButton_Click(object sender, EventArgs e)

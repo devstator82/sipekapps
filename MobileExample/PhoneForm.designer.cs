@@ -89,7 +89,6 @@
           this.statusBar1.Location = new System.Drawing.Point(0, 246);
           this.statusBar1.Name = "statusBar1";
           this.statusBar1.Size = new System.Drawing.Size(240, 22);
-          this.statusBar1.Text = "statusBar1";
           // 
           // buttonRelease
           // 
