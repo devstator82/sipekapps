@@ -63,9 +63,9 @@
           // 
           // textBoxNumber
           // 
-          this.textBoxNumber.Location = new System.Drawing.Point(67, 42);
+          this.textBoxNumber.Location = new System.Drawing.Point(85, 42);
           this.textBoxNumber.Name = "textBoxNumber";
-          this.textBoxNumber.Size = new System.Drawing.Size(170, 21);
+          this.textBoxNumber.Size = new System.Drawing.Size(151, 21);
           this.textBoxNumber.TabIndex = 2;
           // 
           // label1
@@ -73,11 +73,11 @@
           this.label1.Location = new System.Drawing.Point(3, 43);
           this.label1.Name = "label1";
           this.label1.Size = new System.Drawing.Size(100, 20);
-          this.label1.Text = "Number";
+          this.label1.Text = "Dial Number:";
           // 
           // buttonCall
           // 
-          this.buttonCall.Location = new System.Drawing.Point(165, 82);
+          this.buttonCall.Location = new System.Drawing.Point(164, 108);
           this.buttonCall.Name = "buttonCall";
           this.buttonCall.Size = new System.Drawing.Size(72, 20);
           this.buttonCall.TabIndex = 31;
@@ -92,7 +92,7 @@
           // 
           // buttonRelease
           // 
-          this.buttonRelease.Location = new System.Drawing.Point(67, 82);
+          this.buttonRelease.Location = new System.Drawing.Point(67, 108);
           this.buttonRelease.Name = "buttonRelease";
           this.buttonRelease.Size = new System.Drawing.Size(72, 20);
           this.buttonRelease.TabIndex = 34;

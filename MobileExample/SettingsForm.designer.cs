@@ -66,18 +66,17 @@
           // 
           // textBoxUserName
           // 
-          this.textBoxUserName.Location = new System.Drawing.Point(121, 97);
+          this.textBoxUserName.Location = new System.Drawing.Point(83, 97);
           this.textBoxUserName.Name = "textBoxUserName";
-          this.textBoxUserName.Size = new System.Drawing.Size(112, 21);
+          this.textBoxUserName.Size = new System.Drawing.Size(105, 21);
           this.textBoxUserName.TabIndex = 1;
           // 
           // UserName
           // 
-          this.UserName.Font = new System.Drawing.Font("Franklin Gothic Medium", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-          this.UserName.Location = new System.Drawing.Point(3, 98);
+          this.UserName.Location = new System.Drawing.Point(3, 97);
           this.UserName.Name = "UserName";
-          this.UserName.Size = new System.Drawing.Size(100, 20);
-          this.UserName.Text = "User Name";
+          this.UserName.Size = new System.Drawing.Size(61, 20);
+          this.UserName.Text = "Username";
           // 
           // textBoxDomain
           // 
@@ -88,26 +87,24 @@
           // 
           // label1
           // 
-          this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
           this.label1.Location = new System.Drawing.Point(3, 51);
           this.label1.Name = "label1";
           this.label1.Size = new System.Drawing.Size(100, 20);
-          this.label1.Text = "Domain";
+          this.label1.Text = "SIP Server";
           // 
           // textBoxPW
           // 
-          this.textBoxPW.Location = new System.Drawing.Point(121, 145);
+          this.textBoxPW.Location = new System.Drawing.Point(83, 144);
           this.textBoxPW.Name = "textBoxPW";
-          this.textBoxPW.Size = new System.Drawing.Size(112, 21);
+          this.textBoxPW.Size = new System.Drawing.Size(105, 21);
           this.textBoxPW.TabIndex = 2;
           // 
           // label2
           // 
-          this.label2.Font = new System.Drawing.Font("Franklin Gothic Medium", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
           this.label2.Location = new System.Drawing.Point(3, 145);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(100, 20);
-          this.label2.Text = "PassWord";
+          this.label2.Text = "Password";
           // 
           // statusBar1
           // 
