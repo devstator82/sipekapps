@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("InstantSoftphone")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("IskraTEL")]
+[assembly: AssemblyCompany("SasaCoh")]
 [assembly: AssemblyProduct("InstantSoftphone")]
-[assembly: AssemblyCopyright("Copyright © IskraTEL 2008")]
+[assembly: AssemblyCopyright("Copyright © SasaCoh 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
