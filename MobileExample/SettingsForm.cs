@@ -380,6 +380,8 @@ namespace SipekMobile
         //  register event for registration status change
         pjsipRegistrar.Instance.AccountStateChanged += new DAccountStateChanged(proxy_AccountStateChanged);
 
+        //pjsipStackProxy.Instance.ConfigMore.stunServer = "stun.siol.net";
+
         pjsipStackProxy.Instance.initialize();
         CallManager.Initialize();
 
