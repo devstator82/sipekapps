@@ -67,11 +67,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return false;
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -84,11 +84,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return false;
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -96,11 +96,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return "";
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -112,7 +112,7 @@ namespace SipekMobile
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -120,11 +120,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return "";
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -136,7 +136,7 @@ namespace SipekMobile
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -144,11 +144,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return "";
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -156,11 +156,13 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            List<string> cl = new List<string>();
+            cl.Add("PCMU");
+            return cl;
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -168,11 +170,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return false;
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -190,11 +192,11 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return false;
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
@@ -206,13 +208,13 @@ namespace SipekMobile
           }
           set
           {
-            throw new Exception("The method or operation is not implemented.");
+            ;
           }
         }
 
         public void Save()
         {
-          throw new Exception("The method or operation is not implemented.");
+          ;
         }
 
         #endregion
@@ -232,12 +234,9 @@ namespace SipekMobile
         {
           get
           {
-            throw new Exception("The method or operation is not implemented.");
+            return "";
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set{}
         }
 
         public string DisplayName
@@ -246,10 +245,7 @@ namespace SipekMobile
           {
             return "Sipek Instant Softphone";
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set{}
         }
 
         public string DomainName
@@ -258,10 +254,7 @@ namespace SipekMobile
           {
             return "*";
           }
-          set
-          {
-            //throw new Exception("The method or operation is not implemented.");
-          }
+          set{}
         }
 
         public string HostName
@@ -270,10 +263,7 @@ namespace SipekMobile
           {
             return _form.textBoxDomain.Text;
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public string Id
@@ -282,10 +272,7 @@ namespace SipekMobile
           {
             return "myId";
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public int Index
@@ -294,10 +281,7 @@ namespace SipekMobile
           {
             return 0;
           }
-          set
-          {
-            ;
-          }
+          set {}
         }
 
         public string Password
@@ -306,10 +290,7 @@ namespace SipekMobile
           {
             return _form.textBoxPW.Text;
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public string ProxyAddress
@@ -318,22 +299,16 @@ namespace SipekMobile
           {
             return "";
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public int RegState
         {
           get
           {
-            return 0; //throw new Exception("The method or operation is not implemented.");
+            return 0; 
           }
-          set
-          {
-            //throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public ETransportMode TransportMode
@@ -342,10 +317,7 @@ namespace SipekMobile
           {
             return ETransportMode.TM_UDP;
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         public string UserName
@@ -354,10 +326,7 @@ namespace SipekMobile
           {
             return _form.textBoxUserName.Text;
           }
-          set
-          {
-            throw new Exception("The method or operation is not implemented.");
-          }
+          set {}
         }
 
         #endregion
@@ -384,7 +353,12 @@ namespace SipekMobile
 
         pjsipStackProxy.Instance.initialize();
         CallManager.Initialize();
+        pjsipStackProxy.Instance.MessageWaitingIndication += new DMessageWaitingNotification(Instance_MessageWaitingIndication);
+      }
 
+      void Instance_MessageWaitingIndication(int mwi, string text)
+      {
+        //int i = text.Length;
       }
 
       /// <summary>
@@ -444,12 +418,14 @@ namespace SipekMobile
 
       private void exitButton_Click(object sender, EventArgs e)
       {
-          try
-          {
-              System.Diagnostics.Process.GetCurrentProcess().Kill();
-          }
-          catch (Exception j)
-          { }
+        pjsipStackProxy.Instance.shutdown();
+        Close();
+          //try
+          //{
+          //    System.Diagnostics.Process.GetCurrentProcess().Kill();
+          //}
+          //catch (Exception j)
+          //{ }
 
       }
 

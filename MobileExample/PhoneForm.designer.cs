@@ -81,7 +81,7 @@
           this.buttonCall.Name = "buttonCall";
           this.buttonCall.Size = new System.Drawing.Size(72, 20);
           this.buttonCall.TabIndex = 31;
-          this.buttonCall.Text = "Call";
+          this.buttonCall.Text = "Make Call";
           this.buttonCall.Click += new System.EventHandler(this.callButton_Click);
           // 
           // statusBar1
@@ -105,7 +105,7 @@
           this.buttonExit.Name = "buttonExit";
           this.buttonExit.Size = new System.Drawing.Size(72, 20);
           this.buttonExit.TabIndex = 37;
-          this.buttonExit.Text = "Exit";
+          this.buttonExit.Text = "Back";
           this.buttonExit.Click += new System.EventHandler(this.exitButton_Click);
           // 
           // PhoneForm
