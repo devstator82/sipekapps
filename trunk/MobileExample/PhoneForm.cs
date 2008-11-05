@@ -39,8 +39,6 @@ namespace SipekMobile
 {
     public partial class PhoneForm : Form
     {
-      //SoundPlayer player = new SoundPlayer("\\Program Files\\vmhtStackProject\\Alarm5.wav");
-      //SoundPlayer playerTone = new SoundPlayer("\\Program Files\\vmhtStackProject\\ringout.wav");
       IStateMachine _currentCall;
 
       CCallManager CallManager
@@ -52,6 +50,17 @@ namespace SipekMobile
       private void sync_StateChanged(int sessionId)
       {
         statusBar1.Text = CallManager.getCall(sessionId).StateId.ToString();
+
+        if (CallManager.getCall(sessionId).StateId == EStateId.NULL)
+        {
+          buttonCall.Text = "Make Call";
+        }
+        else if (CallManager.getCall(sessionId).StateId == EStateId.INCOMING)
+        {
+          buttonCall.Text = "Accept";
+        }
+
+        this.Refresh();
       }
      
       public PhoneForm(int indexparameter, String host)
@@ -60,6 +69,26 @@ namespace SipekMobile
           
         // register callback
         CallManager.CallStateRefresh += new DCallStateRefresh(CallManager_CallStateRefresh);
+        CallManager.IncomingCallNotification += new DIncomingCallNotification(CallManager_IncomingCallNotification);
+        //pjsipStackProxy.Instance.MessageWaitingIndication += new DMessageWaitingNotification(Instance_MessageWaitingIndication);
+      }
+
+      void CallManager_IncomingCallNotification(int sessionId, string number, string info)
+      {
+        if (this.InvokeRequired)
+        {
+          Invoke(new DIncomingCallNotification(sync_IncomingCall), new object[] {sessionId,number,info});
+        }
+        else
+        {
+          sync_IncomingCall(sessionId, number, info);
+        }
+      }
+
+      void sync_IncomingCall(int sessionId, string number, string info)
+      {
+        _currentCall = CallManager.getCall(sessionId);
+        statusBar1.Text += " call from " + number;
       }
 
       void CallManager_CallStateRefresh(int sessionId)
@@ -76,9 +105,16 @@ namespace SipekMobile
 
       private void callButton_Click(object sender, EventArgs e)
       {
-        _currentCall = CallManager.createOutboundCall(textBoxNumber.Text);
-      }
+        if (_currentCall.Incoming)
+        {
+          CallManager.onUserAnswer(_currentCall.Session);
+        }
+        else 
+        {
+          _currentCall = CallManager.createOutboundCall(textBoxNumber.Text);
+        }
 
+      }
 
       private void releaseButton_Click(object sender, EventArgs e)
       {
@@ -87,12 +123,14 @@ namespace SipekMobile
 
       private void exitButton_Click(object sender, EventArgs e)
       {
-          try
-          {
-              Process.GetCurrentProcess().Kill();
-          }
-          catch (Exception o)
-          { }
+        Close();
+
+          //try
+          //{
+          //    Process.GetCurrentProcess().Kill();
+          //}
+          //catch (Exception o)
+          //{ }
       }
 
     }
