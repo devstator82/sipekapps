@@ -63,8 +63,6 @@ namespace InstantSoftphone
 
       // Inject VoIP stack engine to CallManager
       CallManager.StackProxy = pjsipStackProxy.Instance;
-      //CallManager.Factory = new PhoneFactory(this);
-      //CallManager.MediaProxy = new CMediaPlayerProxy();
 
       // Inject configuration settings SipekSdk
       CallManager.Config = Config;

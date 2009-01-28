@@ -43,12 +43,9 @@ namespace InstantSoftphone
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public List<IAccount> Accounts
@@ -60,24 +57,18 @@ namespace InstantSoftphone
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public string CFBNumber
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return "";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public bool CFNRFlag
@@ -86,22 +77,16 @@ namespace InstantSoftphone
       {
         return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public string CFNRNumber
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return "";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public bool CFUFlag
@@ -110,46 +95,36 @@ namespace InstantSoftphone
       {
         return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public string CFUNumber
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return "";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public List<string> CodecList
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        List<String> cl = new List<string>();
+        cl.Add("PCMA");
+        return cl;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public bool DNDFlag
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public int DefaultAccountIndex
@@ -166,12 +141,9 @@ namespace InstantSoftphone
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return false;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public int SIPPort
@@ -180,15 +152,12 @@ namespace InstantSoftphone
       {
         return 5060;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public void Save()
     {
-      throw new Exception("The method or operation is not implemented.");
+      //TODO;
     }
 
     #endregion
@@ -202,12 +171,9 @@ namespace InstantSoftphone
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return "Account";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public string DisplayName
@@ -216,10 +182,7 @@ namespace InstantSoftphone
       {
         return "Sipek Instant Softphone";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public string DomainName
@@ -228,10 +191,7 @@ namespace InstantSoftphone
       {
         return "*";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public string HostName
@@ -241,10 +201,7 @@ namespace InstantSoftphone
         //return "sipserver.net";
         return "192.168.60.211:5070";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public string Id
@@ -253,10 +210,7 @@ namespace InstantSoftphone
       {
         return "myId";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set { }
     }
 
     public int Index
@@ -265,10 +219,7 @@ namespace InstantSoftphone
       {
         return 0;
       }
-      set
-      {
-        ;
-      }
+      set{}
     }
 
     public string Password
@@ -278,10 +229,7 @@ namespace InstantSoftphone
         //return "mypass";
         return "4444";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set {}
     }
 
     public string ProxyAddress
@@ -290,22 +238,16 @@ namespace InstantSoftphone
       {
         return "";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public int RegState
     {
       get
       {
-        throw new Exception("The method or operation is not implemented.");
+        return 0;
       }
-      set
-      {
-        //throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public ETransportMode TransportMode
@@ -314,10 +256,7 @@ namespace InstantSoftphone
       {
         return ETransportMode.TM_UDP;
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{}
     }
 
     public string UserName
@@ -327,10 +266,7 @@ namespace InstantSoftphone
         //return "myuser";
         return "4444";
       }
-      set
-      {
-        throw new Exception("The method or operation is not implemented.");
-      }
+      set{ }
     }
 
     #endregion
